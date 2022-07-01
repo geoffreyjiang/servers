@@ -1,25 +1,53 @@
 function firstStep(input) {
-  // Your code here
+  return input.split("&");
 }
 
 function secondStep(input) {
-  // Your code here
+  return input.map((el) => {
+    return el.split("=");
+  });
 }
 
 function thirdStep(input) {
-  // Your code here
+  let result = [];
+  input.forEach((el) => {
+    let res = el.map((el2) => {
+      return el2.replace("+", " ");
+    });
+    result.push(res);
+  });
+  return result;
 }
 
 function fourthStep(input) {
-  // Your code here
+  let result = [];
+  input.forEach((el) => {
+    let res = el.map((el2) => {
+      return decodeURIComponent(el2);
+    });
+    result.push(res);
+  });
+  return result;
 }
 
 function fifthStep(input) {
-  // Your code here
+  let obj = {};
+  for (let i = 0; i < input.length; i++) {
+    let arr = input[i];
+    let key = arr[0];
+    let val = arr[1];
+    obj[key] = val;
+  }
+  return obj;
 }
 
 function parseBody(str) {
-  // Your code here
+  let first = firstStep(str);
+  let second = secondStep(first);
+  let third = thirdStep(second);
+  let fourth = fourthStep(third);
+  let fifth = fifthStep(fourth);
+  return fifth;
 }
 
 /******************************************************************************/
@@ -31,5 +59,5 @@ module.exports = {
   thirdStep,
   fourthStep,
   fifthStep,
-  parseBody
+  parseBody,
 };
